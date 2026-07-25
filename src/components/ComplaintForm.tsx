@@ -35,6 +35,7 @@ import {
 import { toast } from "sonner";
 import { z } from "zod";
 import type { Category } from "@/lib/categories";
+import { getDepartmentForComplaintType } from "@/lib/categories";
 import {
   generateComplaintId,
   saveComplaint,
@@ -51,6 +52,23 @@ const schema = z.object({
   location: z.string().trim().min(3, "Location is required").max(200),
   priority: z.enum(["Low", "Medium", "High", "Critical"]),
 });
+
+const DISTRICTS = [
+  "Anantapur",
+  "Chittoor",
+  "East Godavari",
+  "Guntur",
+  "Krishna",
+  "Kurnool",
+  "Nellore",
+  "Prakasam",
+  "Srikakulam",
+  "Visakhapatnam",
+  "Vizianagaram",
+  "West Godavari",
+  "YSR Kadapa",
+  "Other District",
+];
 
 async function fileToDataUrl(f: File): Promise<string> {
   return new Promise((res, rej) => {
@@ -74,6 +92,7 @@ export function ComplaintForm({
   const [title, setTitle] = useState(isOthers ? "" : complaintType);
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
+  const [district, setDistrict] = useState("");
   const [gps, setGps] = useState<{ lat: number; lng: number } | null>(null);
   const [priority, setPriority] = useState<Priority>("Medium");
   const [anonymous, setAnonymous] = useState(true);
@@ -111,6 +130,8 @@ export function ComplaintForm({
           setTitle(data.title || "");
           setDescription(data.description || "");
           setLocation(data.location || "");
+          if (data.district) setDistrict(data.district);
+          if (data.gps) setGps(data.gps);
           setPriority(data.priority || "Medium");
           if (data.images) setImages(data.images);
           if (data.videos) setVideos(data.videos);
@@ -123,6 +144,8 @@ export function ComplaintForm({
       console.error(e);
     }
   }, [category.slug, complaintType]);
+
+  const mappedDepartment = getDepartmentForComplaintType(complaintType);
 
   const runAi = async () => {
     if (!description.trim()) {
@@ -138,7 +161,7 @@ export function ComplaintForm({
         ? "High"
         : priority;
     setAi({
-      department: category.department,
+      department: mappedDepartment,
       summary: description.slice(0, 140) + (description.length > 140 ? "…" : ""),
       priority: detected,
       confidence: 87 + Math.floor(Math.random() * 10),
@@ -212,6 +235,10 @@ export function ComplaintForm({
       toast.error(parsed.error.issues[0].message);
       return;
     }
+    if (!district) {
+      toast.error("Please select a District");
+      return;
+    }
     if (images.length + videos.length + audio.length === 0) {
       toast.error("Evidence is required. Please upload an image, video or voice note.");
       return;
@@ -224,10 +251,12 @@ export function ComplaintForm({
         title,
         description,
         location,
+        district,
         priority,
         images,
         videos,
         audio,
+        gps,
       };
       try {
         sessionStorage.setItem("pending_complaint_form", JSON.stringify(formState));
@@ -238,7 +267,9 @@ export function ComplaintForm({
           title,
           description,
           location,
+          district,
           priority,
+          gps,
         };
         try {
           sessionStorage.setItem("pending_complaint_form", JSON.stringify(fallbackState));
@@ -259,6 +290,7 @@ export function ComplaintForm({
       title: parsed.data.title,
       description: parsed.data.description,
       location: parsed.data.location,
+      district,
       gps,
       priority: parsed.data.priority,
       anonymous,
@@ -266,7 +298,7 @@ export function ComplaintForm({
       videos,
       audio,
       citizen: { email: session.email || "", phone: session.phone || "" },
-      department: category.department,
+      department: mappedDepartment,
       status: "Registered",
       createdAt: Date.now(),
       aiConfidence: ai?.confidence ?? 82,
@@ -334,7 +366,7 @@ export function ComplaintForm({
             </CardTitle>
             <p className="mt-1 text-sm text-muted-foreground flex flex-wrap items-center gap-2">
               <span>Fill in the details below. Evidence (photo / video / voice) is mandatory.</span>
-              <Badge variant="secondary" className="text-xs">🏛️ {category.department}</Badge>
+              <Badge variant="secondary" className="text-xs">🏛️ {mappedDepartment}</Badge>
             </p>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -374,8 +406,24 @@ export function ComplaintForm({
             </div>
           </div>
 
+          <div className="space-y-2">
+            <Label>District</Label>
+            <Select value={district} onValueChange={setDistrict}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select District" />
+              </SelectTrigger>
+              <SelectContent>
+                {DISTRICTS.map((d) => (
+                  <SelectItem key={d} value={d}>
+                    {d}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="space-y-2 md:col-span-2">
-            <Label>Issue Location</Label>
+            <Label>Issue Location / Address Details</Label>
             <div className="flex gap-2">
               <Input
                 value={location}

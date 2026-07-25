@@ -10,168 +10,96 @@ export interface Category {
 
 export const CATEGORIES: Category[] = [
   {
-    slug: "anna-canteen",
-    name: "Anna Canteen",
+    slug: "food-welfare",
+    name: "Food & Public Welfare",
     icon: "🍚",
-    description: "Report food quality, hygiene and canteen service issues.",
+    description: "Report issues regarding food quality, mid-day meals, Anna Canteen, and welfare services.",
     color: "from-orange-500 to-amber-500",
     department: "Civil Supplies Department",
-    complaints: ["Food Quality", "Drinking Water", "Hygiene", "Staff Behaviour", "Food Quantity", "Others"],
+    complaints: ["Food Quality", "Anna Canteen"],
   },
   {
-    slug: "municipality",
-    name: "Municipality",
-    icon: "🏢",
-    description: "Civic issues under municipal jurisdiction.",
+    slug: "civic-infra",
+    name: "Civic Infrastructure",
+    icon: "🏛",
+    description: "Report road damage, street lights, water supply, and municipal sanitation issues.",
     color: "from-blue-500 to-indigo-500",
     department: "Municipal Administration",
-    complaints: [
-      "Road Damage",
-      "Drainage",
-      "Garbage Collection",
-      "Street Lights",
-      "Water Leakage",
-      "Illegal Construction",
-      "Broken Footpath",
-      "Mosquito Problems",
-      "Tree Fallen",
-      "Public Toilet",
-      "Others",
-    ],
+    complaints: ["Road Damage", "Street Lights", "Water Supply", "Garbage"],
   },
   {
-    slug: "school",
-    name: "School",
-    icon: "🏫",
-    description: "Report issues in government schools.",
-    color: "from-emerald-500 to-teal-500",
-    department: "School Education Department",
-    complaints: [
-      "Mid-Day Meal",
-      "Teacher Absence",
-      "Toilet Problem",
-      "Drinking Water",
-      "Electricity",
-      "Broken Furniture",
-      "Classroom Damage",
-      "Bullying",
-      "Transport",
-      "Others",
-    ],
-  },
-  {
-    slug: "college",
-    name: "College",
+    slug: "education",
+    name: "Education",
     icon: "🎓",
-    description: "Report issues in colleges and higher education.",
+    description: "Report issues in government schools, colleges, and higher education facilities.",
     color: "from-purple-500 to-fuchsia-500",
-    department: "Higher Education Department",
-    complaints: [
-      "Faculty",
-      "Attendance",
-      "Examinations",
-      "Laboratory",
-      "Library",
-      "Hostel",
-      "Transport",
-      "Wi-Fi",
-      "Ragging",
-      "Infrastructure",
-      "Others",
-    ],
+    department: "School Education Department",
+    complaints: ["School Issues", "College Issues"],
   },
   {
-    slug: "hospital",
-    name: "Hospital",
+    slug: "health-services",
+    name: "Health Services",
     icon: "🏥",
-    description: "Public health & hospital service complaints.",
+    description: "Report medical shortages, doctor unavailability, and government hospital issues.",
     color: "from-rose-500 to-red-500",
-    department: "Health & Medical Department",
-    complaints: ["Doctor Availability", "Medicine Shortage", "Cleanliness", "Ambulance Delay", "Staff Behaviour", "Others"],
+    department: "Health Department",
+    complaints: ["Hospital Issues"],
   },
   {
-    slug: "water-supply",
-    name: "Water Supply",
-    icon: "🚰",
-    description: "Drinking water & pipeline issues.",
-    color: "from-sky-500 to-cyan-500",
-    department: "Public Health Engineering",
-    complaints: ["No Water Supply", "Contaminated Water", "Low Pressure", "Pipeline Leakage", "Others"],
-  },
-  {
-    slug: "electricity",
-    name: "Electricity",
-    icon: "⚡",
-    description: "Power supply and electrical hazards.",
-    color: "from-yellow-500 to-amber-500",
-    department: "Electricity Department",
-    complaints: ["Power Cut", "Voltage Fluctuation", "Damaged Transformer", "Fallen Wire", "Others"],
-  },
-  {
-    slug: "garbage",
-    name: "Garbage",
-    icon: "🚮",
-    description: "Solid waste and sanitation problems.",
-    color: "from-lime-500 to-green-500",
-    department: "Sanitation Department",
-    complaints: ["Garbage Not Collected", "Overflowing Bins", "Illegal Dumping", "Dead Animal Disposal", "Others"],
-  },
-  {
-    slug: "roads",
-    name: "Roads",
-    icon: "🛣️",
-    description: "Potholes, damaged roads and footpaths.",
+    slug: "other",
+    name: "Other",
+    icon: "➕",
+    description: "Report corruption, traffic hazards, housing, environment, police complaints, and other grievances.",
     color: "from-slate-500 to-gray-600",
-    department: "Roads & Buildings",
-    complaints: ["Potholes", "Damaged Road", "Missing Divider", "Broken Footpath", "Others"],
-  },
-  {
-    slug: "traffic",
-    name: "Traffic",
-    icon: "🚦",
-    description: "Signals, congestion and traffic hazards.",
-    color: "from-red-500 to-orange-500",
-    department: "Traffic Police",
-    complaints: ["Signal Not Working", "Traffic Congestion", "Illegal Parking", "Missing Signboard", "Others"],
-  },
-  {
-    slug: "environment",
-    name: "Environment",
-    icon: "🌳",
-    description: "Pollution, tree felling and ecology issues.",
-    color: "from-green-500 to-emerald-600",
-    department: "Environment Department",
-    complaints: ["Air Pollution", "Noise Pollution", "Tree Cutting", "Water Pollution", "Others"],
-  },
-  {
-    slug: "police",
-    name: "Police",
-    icon: "🚔",
-    description: "Non-emergency police & safety complaints.",
-    color: "from-blue-700 to-indigo-700",
-    department: "Home Department",
-    complaints: ["Public Nuisance", "Missing Person", "Cyber Crime", "Harassment", "Others"],
-  },
-  {
-    slug: "government-offices",
-    name: "Government Offices",
-    icon: "💼",
-    description: "Service delays and misconduct in offices.",
-    color: "from-indigo-500 to-blue-600",
     department: "General Administration",
-    complaints: ["Service Delay", "Staff Absence", "Document Issue", "Others"],
-  },
-  {
-    slug: "corruption",
-    name: "Corruption",
-    icon: "💸",
-    description: "Report bribery, extortion, embezzlement, or misconduct by public officials.",
-    color: "from-red-600 to-amber-600",
-    department: "Anti-Corruption Bureau",
-    complaints: ["Bribery", "Extortion", "Embezzlement", "Misconduct", "Others"],
+    complaints: [
+      "Corruption",
+      "Traffic Issues",
+      "Police Complaints",
+      "Housing Issues",
+      "Revenue Issues",
+      "Environmental Issues",
+      "Other Issues",
+    ],
   },
 ];
 
 export function getCategory(slug: string): Category | undefined {
   return CATEGORIES.find((c) => c.slug === slug);
+}
+
+export function getDepartmentForComplaintType(type: string): string {
+  switch (type) {
+    case "Food Quality":
+    case "Anna Canteen":
+      return "Civil Supplies Department";
+    case "Garbage":
+      return "Municipality";
+    case "Road Damage":
+      return "Roads & Buildings Department";
+    case "Water Supply":
+      return "Water Resources Department";
+    case "Street Lights":
+      return "Electricity Department";
+    case "School Issues":
+      return "School Education Department";
+    case "College Issues":
+      return "Higher Education Department";
+    case "Hospital Issues":
+      return "Health Department";
+    case "Traffic Issues":
+      return "Traffic Police";
+    case "Police Complaints":
+      return "Police Department";
+    case "Housing Issues":
+      return "Housing Department";
+    case "Revenue Issues":
+      return "Revenue Department";
+    case "Environmental Issues":
+      return "Environment Department";
+    case "Corruption":
+      return "Anti-Corruption Bureau / Vigilance Department";
+    default:
+      return "General Administration Department";
+  }
 }

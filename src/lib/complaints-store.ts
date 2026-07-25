@@ -8,6 +8,7 @@ export interface Complaint {
   title: string;
   description: string;
   location: string;
+  district: string;
   gps?: { lat: number; lng: number } | null;
   priority: Priority;
   anonymous: boolean;
@@ -65,6 +66,22 @@ export function saveComplaint(c: Complaint) {
 
 export function getAllComplaints(): Complaint[] {
   return read();
+}
+
+export interface ComplaintStats {
+  total: number;
+  pending: number;
+  resolved: number;
+  inProgress: number;
+}
+
+export function getComplaintStats(): ComplaintStats {
+  const list = getAllComplaints();
+  const total = list.length;
+  const pending = list.filter((c) => c.status === "Registered" || c.status === "Under Review").length;
+  const inProgress = list.filter((c) => c.status === "Assigned" || c.status === "Work Started").length;
+  const resolved = list.filter((c) => c.status === "Resolved").length;
+  return { total, pending, resolved, inProgress };
 }
 
 export function findComplaint(query: string): Complaint[] {

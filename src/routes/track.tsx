@@ -153,41 +153,60 @@ function ComplaintCard({ c, onRefresh }: { c: Complaint; onRefresh: () => void }
   const resolved = c.status === "Resolved";
 
   return (
-    <Card className="shadow-card">
-      <CardHeader>
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <CardTitle className="text-lg">{c.title}</CardTitle>
-            <div className="mt-1 text-xs text-muted-foreground">
-              Complaint ID: <span className="font-mono text-foreground">{c.id}</span>
-            </div>
+    <Card className="shadow-card border-l-4 border-l-primary overflow-hidden">
+      <CardHeader className="bg-muted/35 pb-4 border-b border-border/40">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Complaint Reference</span>
+            <CardTitle className="text-lg font-mono text-foreground font-bold">{c.id}</CardTitle>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="secondary">{c.categoryName}</Badge>
-            <Badge>{c.status}</Badge>
-            <PriorityBadge p={c.priority} />
+            <Badge variant="outline" className="border-primary/20 bg-primary/5 text-primary">{c.categoryName}</Badge>
+            <Badge className="font-semibold">{c.status}</Badge>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-5">
-        <p className="text-sm text-foreground/80">{c.description}</p>
-        <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {c.location}</span>
-          <span>🏛 {c.department}</span>
-          <span>👤 Submitted Anonymously</span>
-          <span>🤖 AI Confidence: {c.aiConfidence}%</span>
+      <CardContent className="space-y-5 pt-5">
+        <div>
+          <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">Description</h4>
+          <p className="text-sm leading-relaxed text-foreground/80 bg-muted/20 p-3 rounded-md border border-border/40 whitespace-pre-wrap">{c.description}</p>
         </div>
 
-        {c.images.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {c.images.slice(0, 6).map((src, i) => (
-              <img key={i} src={src} alt="" className="h-16 w-16 rounded-md object-cover ring-1 ring-border" />
-            ))}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 text-sm">
+          <div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Department</div>
+            <div className="mt-1 font-medium text-foreground">🏛️ {c.department}</div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">District</div>
+            <div className="mt-1 font-medium text-foreground">📍 {c.district || "Not Specified"}</div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Date Lodged</div>
+            <div className="mt-1 font-medium text-foreground">
+              📅 {new Date(c.createdAt).toLocaleDateString("en-IN", { day: 'numeric', month: 'short', year: 'numeric' })}
+            </div>
+          </div>
+        </div>
+
+        {c.images && c.images.length > 0 && (
+          <div>
+            <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">Attached Images</h4>
+            <div className="flex flex-wrap gap-2">
+              {c.images.slice(0, 6).map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt="Evidence"
+                  className="h-20 w-20 rounded-md object-cover ring-1 ring-border shadow-sm transition-all hover:scale-105"
+                />
+              ))}
+            </div>
           </div>
         )}
 
-        <div>
-          <div className="mb-2 h-2 w-full overflow-hidden rounded-full bg-muted">
+        <div className="pt-4 border-t border-border/50">
+          <div className="mb-3 h-2 w-full overflow-hidden rounded-full bg-muted">
             <div
               className="h-full bg-gradient-to-r from-primary to-secondary transition-all"
               style={{ width: `${progress}%` }}
@@ -212,14 +231,6 @@ function ComplaintCard({ c, onRefresh }: { c: Complaint; onRefresh: () => void }
               </li>
             ))}
           </ol>
-        </div>
-
-        <div className="flex flex-wrap justify-end gap-2">
-          {!resolved && (
-            <span className="text-xs text-muted-foreground">
-              Status updates automatically as the officer progresses.
-            </span>
-          )}
         </div>
 
         {resolved && <FeedbackBlock c={c} onSaved={onRefresh} />}

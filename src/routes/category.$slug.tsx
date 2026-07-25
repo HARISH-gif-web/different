@@ -50,7 +50,7 @@ function CategoryPage() {
   }, [category.slug]);
 
   const main = useMemo(() => {
-    return category.complaints.slice(0, 4);
+    return category.complaints;
   }, [category]);
 
   return (
@@ -80,7 +80,7 @@ function CategoryPage() {
       <Card className="mt-8 p-6 shadow-card">
         <h2 className="text-lg font-semibold">Select the type of complaint</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Click on the most relevant issue. Choose "Other" to describe a different problem.
+          Click on the most relevant issue to open the complaint form.
         </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {main.map((c) => (
@@ -91,12 +91,6 @@ function CategoryPage() {
               onClick={() => setSelected(c)}
             />
           ))}
-          <ComplaintButton
-            label="Other"
-            active={selected === "Others" || selected === "Other"}
-            onClick={() => setSelected("Others")}
-            highlight
-          />
         </div>
       </Card>
 

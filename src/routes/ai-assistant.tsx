@@ -20,16 +20,24 @@ interface Msg { role: "user" | "assistant"; text: string }
 function suggest(text: string): string {
   const t = text.toLowerCase();
   if (/water|pipe|tap|leak/.test(t))
-    return "This looks like a Water Supply issue. I'd recommend filing under 'Water Supply' → 'Pipeline Leakage' or 'No Water Supply'.";
+    return "This looks like a Civic Infrastructure issue. I'd recommend filing under 'Civic Infrastructure' → 'Water Supply' (assigned to Water Resources Department).";
   if (/pothole|road|footpath/.test(t))
-    return "This appears to be a Roads issue. Please file under 'Roads' → 'Potholes' with a photo of the location.";
+    return "This appears to be a Civic Infrastructure issue. Please file under 'Civic Infrastructure' → 'Road Damage' (assigned to Roads & Buildings Department).";
   if (/garbage|trash|dump|bin/.test(t))
-    return "This is a Sanitation issue. File under 'Garbage' → 'Garbage Not Collected' or 'Overflowing Bins'.";
+    return "This is a Civic Infrastructure issue. File under 'Civic Infrastructure' → 'Garbage' (assigned to Municipality).";
   if (/light|electric|current|transformer/.test(t))
-    return "This is an Electricity complaint. Try 'Electricity' → 'Power Cut' or 'Fallen Wire' if it's a hazard.";
+    return "This is a Civic Infrastructure issue. Try 'Civic Infrastructure' → 'Street Lights' (assigned to Electricity Department).";
   if (/school|teacher|mid.?day/.test(t))
-    return "This is a School-related complaint. File under 'School' with the specific issue.";
-  return "I can help route your complaint. Try describing the issue in one line — I'll suggest the right department.";
+    return "This is an Education issue. File under 'Education' → 'School Issues' (assigned to School Education Department).";
+  if (/college|university|exam|faculty/.test(t))
+    return "This is an Education issue. File under 'Education' → 'College Issues' (assigned to Higher Education Department).";
+  if (/food|canteen|anna|ration/.test(t))
+    return "This looks like a Food & Public Welfare issue. File under 'Food & Public Welfare' → 'Food Quality' or 'Anna Canteen' (assigned to Civil Supplies Department).";
+  if (/hospital|doctor|medicine|health|nurse/.test(t))
+    return "This is a Health Services issue. File under 'Health Services' → 'Hospital Issues' (assigned to Health Department).";
+  if (/corrupt|bribe|vigilance|money/.test(t))
+    return "This is a Corruption report. File under 'Other' → 'Corruption' (automatically routed to the Anti-Corruption Bureau / Vigilance Department).";
+  return "I can help route your complaint. Try describing the issue in one line (e.g., 'water leakage' or 'road potholes') — I'll suggest the right category and department.";
 }
 
 function Assistant() {

@@ -2,13 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { getAllComplaints, getSessionComplaintsCount } from "@/lib/complaints-store";
+import { Card } from "@/components/ui/card";
+import { getComplaintStats, type ComplaintStats } from "@/lib/complaints-store";
+import { CATEGORIES } from "@/lib/categories";
 import {
   ArrowRight,
   BadgeCheck,
   Bot,
   ShieldCheck,
   Sparkles,
+  ClipboardList,
+  Clock,
+  RotateCw,
+  CheckCircle,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -22,13 +28,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const [complaintsCount, setComplaintsCount] = useState(0);
+  const [stats, setStats] = useState<ComplaintStats>({
+    total: 0,
+    pending: 0,
+    resolved: 0,
+    inProgress: 0,
+  });
 
   useEffect(() => {
-    setComplaintsCount(getSessionComplaintsCount());
+    setStats(getComplaintStats());
 
     const handler = () => {
-      setComplaintsCount(getSessionComplaintsCount());
+      setStats(getComplaintStats());
     };
     window.addEventListener("pm-complaint-count-change", handler);
     return () => window.removeEventListener("pm-complaint-count-change", handler);
@@ -65,7 +76,7 @@ function Home() {
               </Button>
             </div>
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border pt-6">
-              <Stat n={String(complaintsCount)} label="Complaints" />
+              <Stat n={String(stats.total)} label="Total Grievances" />
               <Stat n="AI" label="Auto-routing" />
               <Stat n="24×7" label="Available" />
             </div>
@@ -81,7 +92,7 @@ function Home() {
                   <span className="text-secondary">Mitra</span>
                 </div>
                 <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                  Report · Track · Resolve
+                  Report • Track • Solve
                 </p>
               </div>
             </div>
@@ -89,18 +100,72 @@ function Home() {
         </div>
       </section>
 
-      {/* Website Logo Section */}
-      <section className="mx-auto max-w-7xl px-4 py-16 text-center border-b border-border/50">
-        <div className="mx-auto flex flex-col items-center justify-center gap-4">
-          <div className="relative rounded-full border border-border bg-card p-6 shadow-elevated animate-pulse-slow">
-            <Logo className="h-40 w-40 md:h-48 md:w-48" />
-          </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Praja Mitra Portal
+      {/* PORTAL STATISTICS */}
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <StatCard
+            icon={<ClipboardList className="h-5 w-5 text-blue-600" />}
+            value={stats.total}
+            label="Total Complaints"
+            bg="bg-blue-500/5 border-blue-500/10"
+          />
+          <StatCard
+            icon={<Clock className="h-5 w-5 text-amber-600" />}
+            value={stats.pending}
+            label="Pending Complaints"
+            bg="bg-amber-500/5 border-amber-500/10"
+          />
+          <StatCard
+            icon={<RotateCw className="h-5 w-5 text-violet-600" />}
+            value={stats.inProgress}
+            label="In Progress"
+            bg="bg-violet-500/5 border-violet-500/10"
+          />
+          <StatCard
+            icon={<CheckCircle className="h-5 w-5 text-emerald-600" />}
+            value={stats.resolved}
+            label="Resolved Complaints"
+            bg="bg-emerald-500/5 border-emerald-500/10"
+          />
+        </div>
+      </section>
+
+      {/* GRIEVANCE CATEGORIES */}
+      <section className="mx-auto max-w-7xl px-4 py-16 border-t border-border/50">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Register a Grievance
           </h2>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Official platform for reporting and resolving citizen grievances. Driven by AI for quick routing and accountability.
+          <p className="mx-auto mt-3 max-w-md text-muted-foreground text-sm">
+            Select a category below to lodge your complaint. AI auto-routes the issue to the appropriate authority.
           </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {CATEGORIES.map((c, i) => (
+            <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="block group">
+              <Card className="h-full flex flex-col justify-between overflow-hidden border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevated hover:border-primary/30">
+                <div className={`h-2 bg-gradient-to-r ${c.color}`} />
+                <div className="flex-1 p-5 flex flex-col justify-between">
+                  <div>
+                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${c.color} text-2xl text-white shadow-card`}>
+                      {c.icon}
+                    </div>
+                    <h3 className="mt-4 font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
+                      {c.name}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+                      {c.description}
+                    </p>
+                  </div>
+                  <div className="mt-5 pt-4 border-t border-border/50 flex items-center justify-between text-sm font-medium text-primary">
+                    <span>Register Complaint</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -122,6 +187,20 @@ function Stat({ n, label }: { n: string; label: string }) {
       <div className="text-2xl font-bold text-primary">{n}</div>
       <div className="text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
     </div>
+  );
+}
+
+function StatCard({ icon, value, label, bg }: { icon: React.ReactNode; value: number; label: string; bg: string }) {
+  return (
+    <Card className={`flex items-center gap-4 p-5 shadow-card border ${bg} transition-all hover:shadow-elevated`}>
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background shadow-sm">
+        {icon}
+      </div>
+      <div>
+        <div className="text-2xl font-bold tracking-tight">{value}</div>
+        <div className="text-xs font-medium text-muted-foreground">{label}</div>
+      </div>
+    </Card>
   );
 }
 

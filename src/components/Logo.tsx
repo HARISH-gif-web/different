@@ -13,7 +13,7 @@ export function LogoLockup({ compact = false }: { compact?: boolean }) {
         </div>
         {!compact && (
           <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
-            Report · Track · Resolve
+            Report • Track • Solve
           </div>
         )}
       </div>
