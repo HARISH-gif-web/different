@@ -1,29 +1,26 @@
-# Welcome to your Lovable project
+# PrajaMitra — Report • Track • Solve
 
-This project was built with [Lovable](https://lovable.dev).
+PrajaMitra is a modern citizen grievance portal designed to allow users to register, track, and solve public complaints anonymously and efficiently.
 
-## Build with Lovable
+## Development Setup
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+To run the project locally, ensure you have Node.js (v20+) installed:
 
 ```sh
+# Clone the repository
 git clone <this-repository-url>
-cd <repository-name>
-npm i
+cd different
+
+# Install dependencies
+npm install
+
+# Start the local development server
 npm run dev
 ```
 
-## Built with
+## Built With
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+- **Framework**: TanStack Start (React + Vite)
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Language**: TypeScript
