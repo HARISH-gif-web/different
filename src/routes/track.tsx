@@ -174,6 +174,7 @@ function ComplaintCard({ c, onRefresh }: { c: Complaint; onRefresh: () => void }
         <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {c.location}</span>
           <span>🏛 {c.department}</span>
+          <span>👤 Submitted Anonymously</span>
           <span>🤖 AI Confidence: {c.aiConfidence}%</span>
         </div>
 

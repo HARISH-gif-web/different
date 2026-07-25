@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +34,20 @@ function CategoryPage() {
   const category = Route.useLoaderData() as Category;
   const [selected, setSelected] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    try {
+      const cached = sessionStorage.getItem("pending_complaint_form");
+      if (cached) {
+        const data = JSON.parse(cached);
+        if (data.categorySlug === category.slug && data.complaintType) {
+          setSelected(data.complaintType);
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [category.slug]);
 
   const main = useMemo(() => {
     return category.complaints.slice(0, 4);

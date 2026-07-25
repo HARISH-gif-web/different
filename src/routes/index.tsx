@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { getAllComplaints } from "@/lib/complaints-store";
+import { getAllComplaints, getSessionComplaintsCount } from "@/lib/complaints-store";
 import {
   ArrowRight,
   BadgeCheck,
@@ -25,7 +25,13 @@ function Home() {
   const [complaintsCount, setComplaintsCount] = useState(0);
 
   useEffect(() => {
-    setComplaintsCount(getAllComplaints().length);
+    setComplaintsCount(getSessionComplaintsCount());
+
+    const handler = () => {
+      setComplaintsCount(getSessionComplaintsCount());
+    };
+    window.addEventListener("pm-complaint-count-change", handler);
+    return () => window.removeEventListener("pm-complaint-count-change", handler);
   }, []);
 
   return (

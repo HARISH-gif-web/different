@@ -44,10 +44,23 @@ export function generateComplaintId(): string {
   return `PM-${y}-${rand}`;
 }
 
+export function getSessionComplaintsCount(): number {
+  if (typeof window === "undefined") return 0;
+  return Number(sessionStorage.getItem("pm_session_complaints_count") || "0");
+}
+
+export function incrementSessionComplaintsCount() {
+  if (typeof window === "undefined") return;
+  const current = getSessionComplaintsCount();
+  sessionStorage.setItem("pm_session_complaints_count", String(current + 1));
+  window.dispatchEvent(new Event("pm-complaint-count-change"));
+}
+
 export function saveComplaint(c: Complaint) {
   const list = read();
   list.unshift(c);
   write(list);
+  incrementSessionComplaintsCount();
 }
 
 export function getAllComplaints(): Complaint[] {

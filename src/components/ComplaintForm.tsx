@@ -332,8 +332,9 @@ export function ComplaintForm({
               <span className="text-2xl">{category.icon}</span> {category.name} —{" "}
               {complaintType}
             </CardTitle>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Fill in the details below. Evidence (photo / video / voice) is mandatory.
+            <p className="mt-1 text-sm text-muted-foreground flex flex-wrap items-center gap-2">
+              <span>Fill in the details below. Evidence (photo / video / voice) is mandatory.</span>
+              <Badge variant="secondary" className="text-xs">🏛️ {category.department}</Badge>
             </p>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose}>
