@@ -1,7 +1,5 @@
-import logoAsset from "@/assets/logo.asset.json";
-
 export function Logo({ className = "h-10 w-10" }: { className?: string }) {
-  return <img src={logoAsset.url} alt="Praja Mitra" className={className} />;
+  return <img src="/praja-mitra-logo.png" alt="Praja Mitra" className={className} />;
 }
 
 export function LogoLockup({ compact = false }: { compact?: boolean }) {
