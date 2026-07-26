@@ -78,8 +78,12 @@ export interface ComplaintStats {
 export function getComplaintStats(): ComplaintStats {
   const list = getAllComplaints();
   const total = list.length;
-  const pending = list.filter((c) => c.status === "Registered" || c.status === "Under Review").length;
-  const inProgress = list.filter((c) => c.status === "Assigned" || c.status === "Work Started").length;
+  const pending = list.filter(
+    (c) => c.status === "Registered" || c.status === "Under Review",
+  ).length;
+  const inProgress = list.filter(
+    (c) => c.status === "Assigned" || c.status === "Work Started",
+  ).length;
   const resolved = list.filter((c) => c.status === "Resolved").length;
   return { total, pending, resolved, inProgress };
 }
@@ -98,10 +102,12 @@ export function findComplaint(query: string): Complaint[] {
   });
 }
 
-export function getComplaintsForSession(session: {
-  email?: string;
-  phone?: string;
-} | null): Complaint[] {
+export function getComplaintsForSession(
+  session: {
+    email?: string;
+    phone?: string;
+  } | null,
+): Complaint[] {
   if (!session) return [];
   const phone = (session.phone || "").replace(/\D/g, "").slice(-10);
   const email = (session.email || "").toLowerCase();

@@ -47,11 +47,20 @@ function LoginPage() {
     const digitsOnly = v.replace(/\D/g, "");
     if (digitsOnly.length > 0) {
       if (digitsOnly.length === 10) {
-        return { type: "Mobile Phone Number", color: "bg-emerald-500/10 text-emerald-600 border-emerald-200" };
+        return {
+          type: "Mobile Phone Number",
+          color: "bg-emerald-500/10 text-emerald-600 border-emerald-200",
+        };
       }
-      return { type: "Entering Phone Number...", color: "bg-amber-500/10 text-amber-600 border-amber-200" };
+      return {
+        type: "Entering Phone Number...",
+        color: "bg-amber-500/10 text-amber-600 border-amber-200",
+      };
     }
-    return { type: "Invalid Format", color: "bg-destructive/10 text-destructive border-destructive/20" };
+    return {
+      type: "Invalid Format",
+      color: "bg-destructive/10 text-destructive border-destructive/20",
+    };
   };
 
   const detectedLogin = detectType(identifier);
@@ -176,7 +185,9 @@ function LoginPage() {
                 <div className="flex items-center justify-between">
                   <Label htmlFor="login-identifier">Email Address or Mobile Number</Label>
                   {detectedLogin && (
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full border ${detectedLogin.color}`}>
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded-full border ${detectedLogin.color}`}
+                    >
                       {detectedLogin.type}
                     </span>
                   )}
@@ -267,7 +278,9 @@ function LoginPage() {
                 <div className="flex items-center justify-between">
                   <Label htmlFor="signup-identifier">Email Address or Phone Number</Label>
                   {detectedSignUp && (
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full border ${detectedSignUp.color}`}>
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded-full border ${detectedSignUp.color}`}
+                    >
                       {detectedSignUp.type}
                     </span>
                   )}

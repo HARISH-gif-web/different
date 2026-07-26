@@ -21,7 +21,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Praja Mitra — AI Grievance Portal for Citizens" },
-      { name: "description", content: "Register public complaints, track resolution and get AI-assisted routing to the right department." },
+      {
+        name: "description",
+        content:
+          "Register public complaints, track resolution and get AI-assisted routing to the right department.",
+      },
     ],
   }),
   component: Home,
@@ -49,8 +53,13 @@ function Home() {
     <div>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.06]"
-             style={{ backgroundImage: "radial-gradient(circle at 20% 20%, var(--gov-blue), transparent 40%), radial-gradient(circle at 80% 60%, var(--gov-green), transparent 45%)" }} />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 20%, var(--gov-blue), transparent 40%), radial-gradient(circle at 80% 60%, var(--gov-green), transparent 45%)",
+          }}
+        />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 160%22><path fill=%22%230056B3%22 fill-opacity=%220.08%22 d=%22M0 100 L100 90 L120 60 L160 70 L200 40 L240 60 L280 30 L340 60 L360 20 L400 60 L440 40 L500 70 L540 50 L600 80 L660 40 L700 70 L740 30 L800 60 L860 20 L920 60 L980 40 L1040 70 L1100 50 L1200 80 L1200 160 L0 160Z%22/></svg>')] bg-bottom bg-no-repeat bg-cover" />
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:py-24 lg:grid-cols-2">
           <div className="animate-fade-in-up">
@@ -62,8 +71,8 @@ function Home() {
               <span className="text-secondary">Grievance</span> System
             </h1>
             <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-              Report public issues quickly. AI automatically identifies the correct
-              department and helps government officers resolve problems faster.
+              Report public issues quickly. AI automatically identifies the correct department and
+              helps government officers resolve problems faster.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="shadow-elevated">
@@ -82,8 +91,10 @@ function Home() {
             </div>
           </div>
           <div className="relative flex items-center justify-center animate-scale-in">
-            <div className="absolute inset-0 blur-3xl opacity-40"
-                 style={{ background: "radial-gradient(circle, var(--gov-blue), transparent 60%)" }} />
+            <div
+              className="absolute inset-0 blur-3xl opacity-40"
+              style={{ background: "radial-gradient(circle, var(--gov-blue), transparent 60%)" }}
+            />
             <div className="relative rounded-3xl border border-border bg-card p-8 shadow-elevated">
               <Logo className="h-56 w-56 md:h-72 md:w-72" />
               <div className="mt-4 text-center">
@@ -137,18 +148,26 @@ function Home() {
             Register a Grievance
           </h2>
           <p className="mx-auto mt-3 max-w-md text-muted-foreground text-sm">
-            Select a category below to lodge your complaint. AI auto-routes the issue to the appropriate authority.
+            Select a category below to lodge your complaint. AI auto-routes the issue to the
+            appropriate authority.
           </p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {CATEGORIES.map((c, i) => (
-            <Link key={c.slug} to="/category/$slug" params={{ slug: c.slug }} className="block group">
+            <Link
+              key={c.slug}
+              to="/category/$slug"
+              params={{ slug: c.slug }}
+              className="block group"
+            >
               <Card className="h-full flex flex-col justify-between overflow-hidden border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevated hover:border-primary/30">
                 <div className={`h-2 bg-gradient-to-r ${c.color}`} />
                 <div className="flex-1 p-5 flex flex-col justify-between">
                   <div>
-                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${c.color} text-2xl text-white shadow-card`}>
+                    <div
+                      className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${c.color} text-2xl text-white shadow-card`}
+                    >
                       {c.icon}
                     </div>
                     <h3 className="mt-4 font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
@@ -190,9 +209,21 @@ function Stat({ n, label }: { n: string; label: string }) {
   );
 }
 
-function StatCard({ icon, value, label, bg }: { icon: React.ReactNode; value: number; label: string; bg: string }) {
+function StatCard({
+  icon,
+  value,
+  label,
+  bg,
+}: {
+  icon: React.ReactNode;
+  value: number;
+  label: string;
+  bg: string;
+}) {
   return (
-    <Card className={`flex items-center gap-4 p-5 shadow-card border ${bg} transition-all hover:shadow-elevated`}>
+    <Card
+      className={`flex items-center gap-4 p-5 shadow-card border ${bg} transition-all hover:shadow-elevated`}
+    >
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background shadow-sm">
         {icon}
       </div>

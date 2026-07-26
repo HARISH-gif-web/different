@@ -79,7 +79,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Praja Mitra — AI-Powered Public Grievance Portal" },
-      { name: "description", content: "Report, track and resolve public issues with AI-assisted routing to the right government department." },
+      {
+        name: "description",
+        content:
+          "Report, track and resolve public issues with AI-assisted routing to the right government department.",
+      },
       { name: "author", content: "Praja Mitra" },
       { property: "og:title", content: "Praja Mitra — Report · Track · Resolve" },
       { property: "og:description", content: "AI-powered public complaint & grievance system." },
@@ -93,7 +97,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap",
+      },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),

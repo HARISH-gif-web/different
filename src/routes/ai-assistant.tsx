@@ -9,13 +9,20 @@ export const Route = createFileRoute("/ai-assistant")({
   head: () => ({
     meta: [
       { title: "AI Assistant — Praja Mitra" },
-      { name: "description", content: "Chat with the Praja Mitra AI assistant to figure out where to file your complaint." },
+      {
+        name: "description",
+        content:
+          "Chat with the Praja Mitra AI assistant to figure out where to file your complaint.",
+      },
     ],
   }),
   component: Assistant,
 });
 
-interface Msg { role: "user" | "assistant"; text: string }
+interface Msg {
+  role: "user" | "assistant";
+  text: string;
+}
 
 function suggest(text: string): string {
   const t = text.toLowerCase();
@@ -42,7 +49,10 @@ function suggest(text: string): string {
 
 function Assistant() {
   const [msgs, setMsgs] = useState<Msg[]>([
-    { role: "assistant", text: "Namaste 🙏 I'm the Praja Mitra AI Assistant. Describe your issue and I'll route it to the right department." },
+    {
+      role: "assistant",
+      text: "Namaste 🙏 I'm the Praja Mitra AI Assistant. Describe your issue and I'll route it to the right department.",
+    },
   ]);
   const [input, setInput] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
@@ -53,7 +63,10 @@ function Assistant() {
     if (!q) return;
     setMsgs((m) => [...m, { role: "user", text: q }, { role: "assistant", text: suggest(q) }]);
     setInput("");
-    setTimeout(() => listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }), 40);
+    setTimeout(
+      () => listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" }),
+      40,
+    );
   };
 
   return (
@@ -64,7 +77,9 @@ function Assistant() {
         </div>
         <div>
           <h1 className="text-2xl font-bold">AI Assistant</h1>
-          <p className="text-sm text-muted-foreground">Get instant guidance on where to file your complaint.</p>
+          <p className="text-sm text-muted-foreground">
+            Get instant guidance on where to file your complaint.
+          </p>
         </div>
       </div>
 
@@ -95,8 +110,14 @@ function Assistant() {
           ))}
         </div>
         <form onSubmit={send} className="flex gap-2 border-t border-border p-3">
-          <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Describe your issue…" />
-          <Button type="submit"><Send className="h-4 w-4" /></Button>
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Describe your issue…"
+          />
+          <Button type="submit">
+            <Send className="h-4 w-4" />
+          </Button>
         </form>
       </Card>
     </div>

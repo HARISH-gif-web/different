@@ -7,14 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  CheckCircle2,
-  Circle,
-  Lock,
-  MapPin,
-  Search,
-  Star,
-} from "lucide-react";
+import { CheckCircle2, Circle, Lock, MapPin, Search, Star } from "lucide-react";
 import {
   findComplaint,
   getComplaintsForSession,
@@ -35,7 +28,10 @@ export const Route = createFileRoute("/track")({
   head: () => ({
     meta: [
       { title: "Track Complaint — Praja Mitra" },
-      { name: "description", content: "Track your Praja Mitra complaint by ID or registered phone number." },
+      {
+        name: "description",
+        content: "Track your Praja Mitra complaint by ID or registered phone number.",
+      },
     ],
   }),
   component: Track,
@@ -88,7 +84,8 @@ function Track() {
       return;
     }
     const r = refresh(query);
-    if (r.length === 0) toast.info("No complaint found in your account for that ID or phone number");
+    if (r.length === 0)
+      toast.info("No complaint found in your account for that ID or phone number");
   };
 
   if (!session) {
@@ -99,8 +96,8 @@ function Track() {
         </div>
         <h1 className="mt-4 text-2xl font-bold md:text-3xl">Sign in to track your complaints</h1>
         <p className="mt-2 text-muted-foreground">
-          Your complaints are private to your account. Please sign in with the
-          email or phone number you used to register them.
+          Your complaints are private to your account. Please sign in with the email or phone number
+          you used to register them.
         </p>
         <Button size="lg" className="mt-6" onClick={() => setLoginOpen(true)}>
           Sign in to continue
@@ -115,8 +112,8 @@ function Track() {
       <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Track Your Complaint</h1>
       <p className="mt-2 text-muted-foreground">
         Showing complaints registered with{" "}
-        <span className="font-medium text-foreground">{session.email || session.phone}</span>. Search
-        by Complaint ID or leave empty to see all your complaints.
+        <span className="font-medium text-foreground">{session.email || session.phone}</span>.
+        Search by Complaint ID or leave empty to see all your complaints.
       </p>
 
       <form onSubmit={submit} className="mt-6 flex gap-2">
@@ -129,7 +126,9 @@ function Track() {
             className="h-11 pl-10"
           />
         </div>
-        <Button size="lg" type="submit">Track</Button>
+        <Button size="lg" type="submit">
+          Track
+        </Button>
       </form>
 
       <div className="mt-8 space-y-6">
@@ -157,41 +156,64 @@ function ComplaintCard({ c, onRefresh }: { c: Complaint; onRefresh: () => void }
       <CardHeader className="bg-muted/35 pb-4 border-b border-border/40">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Complaint Reference</span>
+            <span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">
+              Complaint Reference
+            </span>
             <CardTitle className="text-lg font-mono text-foreground font-bold">{c.id}</CardTitle>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className="border-primary/20 bg-primary/5 text-primary">{c.categoryName}</Badge>
+            <Badge variant="outline" className="border-primary/20 bg-primary/5 text-primary">
+              {c.categoryName}
+            </Badge>
             <Badge className="font-semibold">{c.status}</Badge>
           </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-5 pt-5">
         <div>
-          <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">Description</h4>
-          <p className="text-sm leading-relaxed text-foreground/80 bg-muted/20 p-3 rounded-md border border-border/40 whitespace-pre-wrap">{c.description}</p>
+          <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">
+            Description
+          </h4>
+          <p className="text-sm leading-relaxed text-foreground/80 bg-muted/20 p-3 rounded-md border border-border/40 whitespace-pre-wrap">
+            {c.description}
+          </p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 text-sm">
           <div>
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Department</div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Department
+            </div>
             <div className="mt-1 font-medium text-foreground">🏛️ {c.department}</div>
           </div>
           <div>
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">District</div>
-            <div className="mt-1 font-medium text-foreground">📍 {c.district || "Not Specified"}</div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              District
+            </div>
+            <div className="mt-1 font-medium text-foreground">
+              📍 {c.district || "Not Specified"}
+            </div>
           </div>
           <div>
-            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Date Lodged</div>
+            <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Date Lodged
+            </div>
             <div className="mt-1 font-medium text-foreground">
-              📅 {new Date(c.createdAt).toLocaleDateString("en-IN", { day: 'numeric', month: 'short', year: 'numeric' })}
+              📅{" "}
+              {new Date(c.createdAt).toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
             </div>
           </div>
         </div>
 
         {c.images && c.images.length > 0 && (
           <div>
-            <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">Attached Images</h4>
+            <h4 className="text-xs uppercase font-semibold text-muted-foreground tracking-wider mb-2">
+              Attached Images
+            </h4>
             <div className="flex flex-wrap gap-2">
               {c.images.slice(0, 6).map((src, i) => (
                 <img
@@ -298,13 +320,23 @@ function FeedbackBlock({ c, onSaved }: { c: Complaint; onSaved: () => void }) {
             😞 Not Satisfied
           </Button>
         </div>
-        <Button size="sm" className="ml-auto" onClick={save}>Submit Feedback</Button>
+        <Button size="sm" className="ml-auto" onClick={save}>
+          Submit Feedback
+        </Button>
       </div>
     </div>
   );
 }
 
-function StarRow({ label, value, onChange }: { label: string; value: number; onChange: (n: number) => void }) {
+function StarRow({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (n: number) => void;
+}) {
   return (
     <div>
       <div className="mb-1 text-xs font-medium text-muted-foreground">{label}</div>

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -36,11 +42,20 @@ export function LoginDialog({
     const digitsOnly = v.replace(/\D/g, "");
     if (digitsOnly.length > 0) {
       if (digitsOnly.length === 10) {
-        return { type: "Mobile Phone Number", color: "bg-emerald-500/10 text-emerald-600 border-emerald-200" };
+        return {
+          type: "Mobile Phone Number",
+          color: "bg-emerald-500/10 text-emerald-600 border-emerald-200",
+        };
       }
-      return { type: "Entering Phone...", color: "bg-amber-500/10 text-amber-600 border-amber-200" };
+      return {
+        type: "Entering Phone...",
+        color: "bg-amber-500/10 text-amber-600 border-amber-200",
+      };
     }
-    return { type: "Invalid Format", color: "bg-destructive/10 text-destructive border-destructive/20" };
+    return {
+      type: "Invalid Format",
+      color: "bg-destructive/10 text-destructive border-destructive/20",
+    };
   };
 
   const detectedLogin = detectType(identifier);
@@ -154,7 +169,9 @@ export function LoginDialog({
               <div className="flex items-center justify-between">
                 <Label htmlFor="lg-identifier">Email Address or Phone Number</Label>
                 {detectedLogin && (
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded-full border ${detectedLogin.color}`}>
+                  <span
+                    className={`text-[9px] px-1.5 py-0.5 rounded-full border ${detectedLogin.color}`}
+                  >
                     {detectedLogin.type}
                   </span>
                 )}
@@ -238,7 +255,9 @@ export function LoginDialog({
               <div className="flex items-center justify-between">
                 <Label htmlFor="lg-signup-identifier">Email Address or Phone Number</Label>
                 {detectedSignUp && (
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded-full border ${detectedSignUp.color}`}>
+                  <span
+                    className={`text-[9px] px-1.5 py-0.5 rounded-full border ${detectedSignUp.color}`}
+                  >
                     {detectedSignUp.type}
                   </span>
                 )}

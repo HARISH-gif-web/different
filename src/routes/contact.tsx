@@ -66,15 +66,29 @@ function Contact() {
         <form onSubmit={submit} className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <Label>Name</Label>
-            <Input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} maxLength={100} />
+            <Input
+              value={f.name}
+              onChange={(e) => setF({ ...f, name: e.target.value })}
+              maxLength={100}
+            />
           </div>
           <div className="space-y-2">
             <Label>Email</Label>
-            <Input type="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} maxLength={200} />
+            <Input
+              type="email"
+              value={f.email}
+              onChange={(e) => setF({ ...f, email: e.target.value })}
+              maxLength={200}
+            />
           </div>
           <div className="space-y-2 md:col-span-2">
             <Label>Message</Label>
-            <Textarea rows={5} value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} maxLength={1000} />
+            <Textarea
+              rows={5}
+              value={f.message}
+              onChange={(e) => setF({ ...f, message: e.target.value })}
+              maxLength={1000}
+            />
           </div>
           <div className="md:col-span-2 flex justify-end">
             <Button type="submit">Send Message</Button>

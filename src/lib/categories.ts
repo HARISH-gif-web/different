@@ -13,7 +13,8 @@ export const CATEGORIES: Category[] = [
     slug: "food-welfare",
     name: "Food & Public Welfare",
     icon: "🍚",
-    description: "Report issues regarding food quality, mid-day meals, Anna Canteen, and welfare services.",
+    description:
+      "Report issues regarding food quality, mid-day meals, Anna Canteen, and welfare services.",
     color: "from-orange-500 to-amber-500",
     department: "Civil Supplies Department",
     complaints: ["Food Quality", "Anna Canteen"],
@@ -22,7 +23,8 @@ export const CATEGORIES: Category[] = [
     slug: "civic-infra",
     name: "Civic Infrastructure",
     icon: "🏛",
-    description: "Report road damage, street lights, water supply, and municipal sanitation issues.",
+    description:
+      "Report road damage, street lights, water supply, and municipal sanitation issues.",
     color: "from-blue-500 to-indigo-500",
     department: "Municipal Administration",
     complaints: ["Road Damage", "Street Lights", "Water Supply", "Garbage"],
@@ -49,7 +51,8 @@ export const CATEGORIES: Category[] = [
     slug: "other",
     name: "Other",
     icon: "➕",
-    description: "Report corruption, traffic hazards, housing, environment, police complaints, and other grievances.",
+    description:
+      "Report corruption, traffic hazards, housing, environment, police complaints, and other grievances.",
     color: "from-slate-500 to-gray-600",
     department: "General Administration",
     complaints: [

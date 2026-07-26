@@ -16,7 +16,10 @@ export const Route = createFileRoute("/category/$slug")({
   head: ({ loaderData }) => ({
     meta: [
       { title: `${loaderData?.name ?? "Category"} Complaints — Praja Mitra` },
-      { name: "description", content: `Register a ${loaderData?.name ?? ""} complaint. AI routes it to ${loaderData?.department ?? "the department"}.` },
+      {
+        name: "description",
+        content: `Register a ${loaderData?.name ?? ""} complaint. AI routes it to ${loaderData?.department ?? "the department"}.`,
+      },
     ],
   }),
   component: CategoryPage,
@@ -64,12 +67,12 @@ function CategoryPage() {
 
       <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${category.color} text-3xl text-white shadow-card`}>
+          <div
+            className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${category.color} text-3xl text-white shadow-card`}
+          >
             {category.icon}
           </div>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-            {category.name}
-          </h1>
+          <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{category.name}</h1>
           <p className="mt-1 max-w-2xl text-muted-foreground">{category.description}</p>
         </div>
         <Badge variant="secondary" className="text-xs">

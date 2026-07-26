@@ -29,7 +29,9 @@ function RegisterIndex() {
             >
               <div className={`h-2 bg-gradient-to-r ${c.color}`} />
               <div className="p-5">
-                <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${c.color} text-2xl text-white shadow-card`}>
+                <div
+                  className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${c.color} text-2xl text-white shadow-card`}
+                >
                   {c.icon}
                 </div>
                 <h3 className="mt-3 font-semibold">{c.name}</h3>

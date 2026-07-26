@@ -185,8 +185,7 @@ export function ComplaintForm({
       (pos) => {
         setGps({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setLocation(
-          (l) =>
-            l || `${pos.coords.latitude.toFixed(5)}, ${pos.coords.longitude.toFixed(5)}`,
+          (l) => l || `${pos.coords.latitude.toFixed(5)}, ${pos.coords.longitude.toFixed(5)}`,
         );
         toast.success("Location captured");
       },
@@ -361,12 +360,13 @@ export function ComplaintForm({
         <div className="flex items-start justify-between gap-4">
           <div>
             <CardTitle className="flex items-center gap-2 text-xl">
-              <span className="text-2xl">{category.icon}</span> {category.name} —{" "}
-              {complaintType}
+              <span className="text-2xl">{category.icon}</span> {category.name} — {complaintType}
             </CardTitle>
             <p className="mt-1 text-sm text-muted-foreground flex flex-wrap items-center gap-2">
               <span>Fill in the details below. Evidence (photo / video / voice) is mandatory.</span>
-              <Badge variant="secondary" className="text-xs">🏛️ {mappedDepartment}</Badge>
+              <Badge variant="secondary" className="text-xs">
+                🏛️ {mappedDepartment}
+              </Badge>
             </p>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -395,7 +395,13 @@ export function ComplaintForm({
               maxLength={2000}
             />
             <div className="flex justify-end">
-              <Button type="button" variant="outline" size="sm" onClick={runAi} disabled={aiRunning}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={runAi}
+                disabled={aiRunning}
+              >
                 {aiRunning ? (
                   <Loader2 className="mr-1 h-4 w-4 animate-spin" />
                 ) : (
@@ -459,7 +465,9 @@ export function ComplaintForm({
           <div className="flex items-end justify-between gap-3 rounded-md border border-border bg-muted/50 p-3">
             <div>
               <Label className="text-sm">Anonymous Submission</Label>
-              <p className="text-xs text-muted-foreground">All complaints are submitted anonymously to protect citizen privacy.</p>
+              <p className="text-xs text-muted-foreground">
+                All complaints are submitted anonymously to protect citizen privacy.
+              </p>
             </div>
             <span className="text-xs font-semibold text-secondary">Always Enabled</span>
           </div>
@@ -532,8 +540,12 @@ export function ComplaintForm({
               </Badge>
             </div>
             <div className="grid gap-2 text-sm md:grid-cols-2">
-              <div><span className="font-medium">Department:</span> {ai.department}</div>
-              <div><span className="font-medium">Suggested Priority:</span> {ai.priority}</div>
+              <div>
+                <span className="font-medium">Department:</span> {ai.department}
+              </div>
+              <div>
+                <span className="font-medium">Suggested Priority:</span> {ai.priority}
+              </div>
               <div className="md:col-span-2">
                 <span className="font-medium">Summary:</span> {ai.summary}
               </div>
@@ -545,12 +557,18 @@ export function ComplaintForm({
         )}
 
         <div className="flex flex-wrap justify-end gap-3 border-t border-border pt-4">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
           <Button onClick={doSubmit} disabled={submitting} className="min-w-40">
             {submitting ? (
-              <><Loader2 className="mr-1 h-4 w-4 animate-spin" /> Submitting…</>
+              <>
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" /> Submitting…
+              </>
             ) : (
-              <><CheckCircle2 className="mr-1 h-4 w-4" /> Submit Complaint</>
+              <>
+                <CheckCircle2 className="mr-1 h-4 w-4" /> Submit Complaint
+              </>
             )}
           </Button>
         </div>
@@ -572,8 +590,7 @@ export function ComplaintForm({
               Complaint Registered
             </DialogTitle>
             <DialogDescription>
-              Your complaint has been submitted successfully. Save the receipt for
-              your records.
+              Your complaint has been submitted successfully. Save the receipt for your records.
             </DialogDescription>
           </DialogHeader>
           {receipt && (
@@ -583,16 +600,13 @@ export function ComplaintForm({
                 <span className="font-mono font-semibold">{receipt.id}</span>
               </div>
               <div>
-                <span className="text-muted-foreground">Category:</span>{" "}
-                {receipt.categoryName}
+                <span className="text-muted-foreground">Category:</span> {receipt.categoryName}
               </div>
               <div>
-                <span className="text-muted-foreground">Department:</span>{" "}
-                {receipt.department}
+                <span className="text-muted-foreground">Department:</span> {receipt.department}
               </div>
               <div>
-                <span className="text-muted-foreground">Priority:</span>{" "}
-                {receipt.priority}
+                <span className="text-muted-foreground">Priority:</span> {receipt.priority}
               </div>
               <div>
                 <span className="text-muted-foreground">Submitted:</span>{" "}
@@ -601,10 +615,7 @@ export function ComplaintForm({
             </div>
           )}
           <DialogFooter className="flex-col gap-2 sm:flex-row">
-            <Button
-              variant="outline"
-              onClick={() => receipt && downloadReceipt(receipt)}
-            >
+            <Button variant="outline" onClick={() => receipt && downloadReceipt(receipt)}>
               <Download className="mr-1 h-4 w-4" /> Download Receipt
             </Button>
             <Button
